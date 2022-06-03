@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-person" author="uPagge">
+        <createTable tableName="person" remarks="Общая таблица для людей">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar(60)" remarks="Имя">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(60)" remarks="Фамилия">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="date" remarks="Дата рождения"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-author" author="uPagge">
+        <createTable tableName="author" remarks="Автор книги">
+            <column name="person_id" type="int" remarks="Идентификатор">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="author_id_person_id"
+                             references="person(id)"
+                             deleteCascade="true"/>
+            </column>
+            <column name="nickname" type="varchar(50)" remarks="Псевдоним автора"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-books" author="uPagge">
+        <createTable tableName="book">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(100)" remarks="Название книги">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text" remarks="Описание книги"/>
+            <column name="isbn" type="varchar(100)" remarks="Уникальный идентификатор книги">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="status" type="varchar(50)" remarks="Статус написания книги">
+                <constraints nullable="false"/>
+            </column>
+            <column name="publication_date" type="date" remarks="Дата публикации"/>
+            <column name="author" type="int" remarks="Автор книги">
+                <constraints nullable="false" foreignKeyName="book_author_person_id" references="author(person_id)"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-publishing-house" author="uPagge">
+        <createTable tableName="publishing_house" remarks="Издательство">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)" remarks="Название издательства">
+                <constraints nullable="false"/>
+            </column>
+            <column name="founding_date" type="date" remarks="Дата основания"/>
+        </createTable>
+
+        <createTable tableName="publishing_book" remarks="Изданные книги издательством">
+            <column name="publishing_house_id" type="int" remarks="Издательство">
+                <constraints nullable="false" foreignKeyName="publishing_book_publishing_house_id"
+                             references="publishing_house(id)"
+                             deleteCascade="true"/>
+            </column>
+            <column name="book_id" type="int" remarks="Книга">
+                <constraints foreignKeyName="publishing_book_book_id" references="book(id)" deleteCascade="true"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="publishing_book" columnNames="publishing_house_id, book_id"/>
+    </changeSet>
+
+    <changeSet id="create-table-manager" author="uPagge">
+        <createTable tableName="manager" remarks="Агент издательства">
+            <column name="person_id" type="int" remarks="Идентификатор">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="author_id_person_id"
+                             references="person(id)"
+                             deleteCascade="true"/>
+            </column>
+            <column name="publishing_house_id" type="int" remarks="Издательство">
+                <constraints foreignKeyName="manager_publishing_house_id" references="publishing_house(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-author-manager" author="uPagge">
+        <createTable tableName="author_manager" remarks="Связь авторов и издателей">
+            <column name="author_id" type="int" remarks="Автор">
+                <constraints nullable="false" references="author(person_id)"
+                             foreignKeyName="author_manager_author_id_author_person_id" deleteCascade="true"/>
+            </column>
+            <column name="manager_id" type="int" remarks="Агент издательства">
+                <constraints nullable="false" references="manager(person_id)"
+                             foreignKeyName="author_manager_manager_id_manager_person_id" deleteCascade="true"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="author_manager" columnNames="author_id, manager_id"/>
+    </changeSet>
+
+</databaseChangeLog>
