@@ -21,7 +21,7 @@
 
     <changeSet id="create-table-author" author="uPagge">
         <createTable tableName="author" remarks="Автор книги">
-            <column name="person_id" type="int" remarks="Идентификатор">
+            <column name="id" type="int" remarks="Идентификатор">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="author_id_person_id"
                              references="person(id)"
                              deleteCascade="true"/>
@@ -47,7 +47,7 @@
             </column>
             <column name="publication_date" type="date" remarks="Дата публикации"/>
             <column name="author" type="int" remarks="Автор книги">
-                <constraints nullable="false" foreignKeyName="book_author_person_id" references="author(person_id)"
+                <constraints nullable="false" foreignKeyName="book_author_person_id" references="author(id)"
                              deleteCascade="true"/>
             </column>
         </createTable>
@@ -80,7 +80,7 @@
 
     <changeSet id="create-table-manager" author="uPagge">
         <createTable tableName="manager" remarks="Агент издательства">
-            <column name="person_id" type="int" remarks="Идентификатор">
+            <column name="id" type="int" remarks="Идентификатор">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="author_id_person_id"
                              references="person(id)"
                              deleteCascade="true"/>
@@ -94,11 +94,11 @@
     <changeSet id="create-table-author-manager" author="uPagge">
         <createTable tableName="author_manager" remarks="Связь авторов и издателей">
             <column name="author_id" type="int" remarks="Автор">
-                <constraints nullable="false" references="author(person_id)"
+                <constraints nullable="false" references="author(id)"
                              foreignKeyName="author_manager_author_id_author_person_id" deleteCascade="true"/>
             </column>
             <column name="manager_id" type="int" remarks="Агент издательства">
-                <constraints nullable="false" references="manager(person_id)"
+                <constraints nullable="false" references="manager(id)"
                              foreignKeyName="author_manager_manager_id_manager_person_id" deleteCascade="true"/>
             </column>
         </createTable>

@@ -6,3 +6,6 @@ spring:
     url: jdbc:postgresql://${DB_URL}
   liquibase:
     change-log: liquibase/changelog-master.xml
+    contexts: local
+  jpa:
+    show-sql: true

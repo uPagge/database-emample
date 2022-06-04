@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="insert-author" author="uPagge">
+        <insert tableName="person">
+            <column name="last_name" value="Пушкин"/>
+            <column name="first_name" value="Александр"/>
+            <column name="birth_date" value="1799-05-26"/>
+        </insert>
+
+        <insert tableName="author">
+            <column name="id" value="1"/>
+            <column name="nickname" value="Косичкин"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-book" author="uPagge">
+        <insert tableName="book">
+            <column name="title" value="Капитанская дочка"/>
+            <column name="isbn" value="978-5-389-04732-7"/>
+            <column name="status" value="RELEASED"/>
+            <column name="publication_date" value="1836-07-21"/>
+            <column name="author" value="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
