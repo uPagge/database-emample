@@ -31,9 +31,13 @@
 <!--            <groupId>dev.struchkov.example.library</groupId>-->
 <!--            <artifactId>library-data-jdbc</artifactId>-->
 <!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>dev.struchkov.example.library</groupId>-->
+<!--            <artifactId>library-data-jdbc-template</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>dev.struchkov.example.library</groupId>
-            <artifactId>library-data-jdbc-template</artifactId>
+            <artifactId>library-data-jpa</artifactId>
         </dependency>
 
         <dependency>
