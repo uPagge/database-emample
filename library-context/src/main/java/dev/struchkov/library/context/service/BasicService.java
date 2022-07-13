@@ -10,4 +10,6 @@ public interface BasicService<T, K> {
 
     T getByIdOrThrown(@NonNull K entityId);
 
+    T update(@NonNull T entity);
+
 }

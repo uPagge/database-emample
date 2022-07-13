@@ -2,16 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
     <parent>
+        <artifactId>library</artifactId>
         <groupId>dev.struchkov.example.library</groupId>
-        <artifactId>library-data</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>library-data-jdbc-template</artifactId>
-
-    <name>Data JDBC Template</name>
+    <artifactId>library-data-jpa</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -20,17 +19,23 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>dev.struchkov.example.library</groupId>
             <artifactId>library-context</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
     </dependencies>
 

@@ -27,4 +27,15 @@
         </insert>
     </changeSet>
 
+    <changeSet id="insert-pub-house" author="uPagge">
+        <insert tableName="publishing_house">
+            <column name="name" value="Азбука"/>
+        </insert>
+
+        <insert tableName="publishing_book">
+            <column name="publishing_house_id" value="1"/>
+            <column name="book_id" value="1"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

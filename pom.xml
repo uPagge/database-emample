@@ -23,6 +23,7 @@
         <module>library-core</module>
         <module>library-data</module>
         <module>library-web</module>
+        <module>library-data/library-data-jpa</module>
     </modules>
 
     <properties>
@@ -60,9 +61,14 @@
 <!--                <artifactId>library-data-jdbc</artifactId>-->
 <!--                <version>0.0.1-SNAPSHOT</version>-->
 <!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>dev.struchkov.example.library</groupId>-->
+<!--                <artifactId>library-data-jdbc-template</artifactId>-->
+<!--                <version>0.0.1-SNAPSHOT</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>dev.struchkov.example.library</groupId>
-                <artifactId>library-data-jdbc-template</artifactId>
+                <artifactId>library-data-jpa</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 

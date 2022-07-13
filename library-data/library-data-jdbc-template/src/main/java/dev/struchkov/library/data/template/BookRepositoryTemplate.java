@@ -3,6 +3,7 @@ package dev.struchkov.library.data.template;
 import dev.struchkov.library.context.repository.BookRepository;
 import dev.struchkov.library.data.template.crud.BookCrudRepository;
 import dev.struchkov.library.domain.entity.Book;
+import dev.struchkov.library.domain.filter.BookFilter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,16 @@ public class BookRepositoryTemplate implements BookRepository {
     @Override
     public List<Book> findByAuthorNickname(@NonNull String authorNickName) {
         return crudRepository.findByAuthorNickname(authorNickName);
+    }
+
+    @Override
+    public List<Book> filter(@NonNull BookFilter filter) {
+        return null;
+    }
+
+    @Override
+    public List<Book> findByAuthorLastName(@NonNull String lastName) {
+        return null;
     }
 
 }

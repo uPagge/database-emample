@@ -16,12 +16,14 @@ public class BookToDtoConvert implements Converter<Book, BookDto> {
     public BookDto convert(Book source) {
         if (source != null) {
             final BookDto bookDto = new BookDto();
+            bookDto.setId(source.getId());
             bookDto.setBookStatus(source.getBookStatus());
             bookDto.setDescription(source.getDescription());
             bookDto.setIsbn(source.getIsbn());
             bookDto.setPublicationDate(source.getPublicationDate());
             bookDto.setTitle(source.getTitle());
             bookDto.setAuthorId(source.getAuthorId());
+            bookDto.setAuthor(authorToDtoConverter.convert(source.getAuthor()));
             return bookDto;
         }
         return null;

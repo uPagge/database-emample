@@ -3,24 +3,26 @@ package dev.struchkov.library.domain.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
-@Table("author")
+@Table(name = "author")
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @PrimaryKeyJoinColumn(name = "id")
 public class Author extends Person {
 
-    @Column("nickname")
+    @Column(name = "nickname")
     private String nickname;
 
-    @MappedCollection
+    @OneToMany(mappedBy = "author")
     private List<Book> books;
 
 }

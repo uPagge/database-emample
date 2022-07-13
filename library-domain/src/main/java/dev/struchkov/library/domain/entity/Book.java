@@ -4,36 +4,56 @@ import dev.struchkov.library.domain.BookStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
 @Setter
 @Getter
-@Table("book")
+@Table(name = "book")
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Book extends BasicEntity {
 
-    @Column("title")
+    @Column(name = "title")
     private String title;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @Column("isbn")
+    @Column(name = "isbn")
     private String isbn;
 
-    @Column("status")
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private BookStatus bookStatus;
 
-    @Column("publication_date")
+    @Column(name = "publication_date")
     private LocalDate publicationDate;
 
-    @Column("author")
+    @Column(name = "author", insertable = false, updatable = false)
     private Long authorId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author")
+    private Author author;
+
+    @ManyToMany
+    @JoinTable(
+            name = "publishing_book",
+            inverseJoinColumns = @JoinColumn(name = "publishing_house_id"),
+            joinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<PubHouse> pubHouse;
 
 }
